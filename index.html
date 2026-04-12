@@ -224,112 +224,120 @@
   </footer>
 
   <!-- ===== SCRIPT ===== -->
-  <script>
-    const cart = new Map();
-    document.getElementById("year").textContent = new Date().getFullYear();
+<script>
+// prevents heavy functions from running too often
+  function debounce(func, delay = 120) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(null, args), delay);
+    };
+  }
 
-    const cartDrawer = document.getElementById("cartDrawer");
-    const closeCartBtn = document.getElementById("closeCartBtn");
+  const cart = new Map();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-    function openCart() {
-      cartDrawer.setAttribute("aria-hidden", "false");
-      cartDrawer.classList.add("open");
-    }
-    function closeCart() {
-      cartDrawer.setAttribute("aria-hidden", "true");
-      cartDrawer.classList.remove("open");
-    }
+  const cartDrawer = document.getElementById("cartDrawer");
+  const closeCartBtn = document.getElementById("closeCartBtn");
 
-    closeCartBtn.addEventListener("click", closeCart);
-    cartDrawer.addEventListener("click", (e) => { if (e.target === cartDrawer) closeCart(); });
+  function openCart() {
+    cartDrawer.setAttribute("aria-hidden", "false");
+    cartDrawer.classList.add("open");
+  }
 
-    function addToCart(name, price) {
-      const item = cart.get(name) || { price, qty: 0 };
-      item.qty++;
-      cart.set(name, item);
-      renderCart();
-      openCart();
-    }
+  function closeCart() {
+    cartDrawer.setAttribute("aria-hidden", "true");
+    cartDrawer.classList.remove("open");
+  }
 
-    function clearCart() {
-      cart.clear();
-      renderCart();
-    }
+  closeCartBtn.addEventListener("click", closeCart);
+  cartDrawer.addEventListener("click", (e) => {
+    if (e.target === cartDrawer) closeCart();
+  });
 
-    function changeQty(name, delta) {
-      const item = cart.get(name);
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) cart.delete(name);
-      renderCart();
-    }
+  function addToCart(name, price) {
+    const item = cart.get(name) || { price, qty: 0 };
+    item.qty++;
+    cart.set(name, item);
+    renderCartDebounced();
+    openCart();
+  }
 
-    function renderCart() {
-      const itemsEl = document.getElementById("cartItems");
-      const subtotalEl = document.getElementById("subtotal");
-      const summaryEl = document.getElementById("orderSummary");
-      const notes = (document.getElementById("orderNotes").value || "").trim();
-
-      itemsEl.innerHTML = "";
-      let subtotal = 0;
-
-      for (const [name, item] of cart) {
-        const line = item.qty * item.price;
-        subtotal += line;
-
-        const row = document.createElement("div");
-        row.className = "cart-item";
-        row.innerHTML = `
-          <div class="cart-item-main">
-            <div class="cart-item-title">${name}</div>
-            <div class="muted small">$${item.price.toFixed(2)} each</div>
-          </div>
-          <div class="cart-item-actions">
-            <button class="qty" aria-label="Decrease" onclick="changeQty(${JSON.stringify(name)}, -1)">−</button>
-            <span class="qty-count">${item.qty}</span>
-            <button class="qty" aria-label="Increase" onclick="changeQty(${JSON.stringify(name)}, 1)">+</button>
-          </div>
-        `;
-        itemsEl.appendChild(row);
-      }
-
-      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-
-      if (cart.size === 0) {
-        summaryEl.textContent = "No items added yet.";
-        return;
-      }
-
-      let text = "";
-      for (const [name, item] of cart) {
-        const line = item.qty * item.price;
-        text += `${name} x${item.qty} — $${line.toFixed(2)}\n`;
-      }
-      if (notes) text += `\nNotes: ${notes}\n`;
-      text += `\nTotal: $${subtotal.toFixed(2)}`;
-      summaryEl.textContent = text;
-    }
-
-    document.getElementById("orderNotes").addEventListener("input", renderCart);
-
-    function checkout() {
-      const summary = document.getElementById("orderSummary").textContent;
-      if (!summary || summary === "No items added yet.") {
-        alert("Add something to the cart first.");
-        return;
-      }
-      navigator.clipboard?.writeText(summary);
-      alert("Order summary copied (if your browser allows).\n\nNext: send the order summary + your contact info to VFL Creations.");
-    }
-
-    function handleContactSubmit(e) {
-      e.preventDefault();
-      alert("Thanks! Your message was captured (demo).");
-      e.target.reset();
-      return false;
-    }
-
+  function clearCart() {
+    cart.clear();
     renderCart();
-  </script>
+  }
+
+  function changeQty(name, delta) {
+    const item = cart.get(name);
+    if (!item) return;
+
+    item.qty += delta;
+    if (item.qty <= 0) cart.delete(name);
+
+    renderCartDebounced();
+  }
+
+  function renderCart() {
+    const itemsEl = document.getElementById("cartItems");
+    const subtotalEl = document.getElementById("subtotal");
+    const summaryEl = document.getElementById("orderSummary");
+    const notes = (document.getElementById("orderNotes").value || "").trim();
+
+    itemsEl.innerHTML = "";
+    let subtotal = 0;
+
+    for (const [name, item] of cart) {
+      const line = item.qty * item.price;
+      subtotal += line;
+
+      const row = document.createElement("div");
+      row.className = "cart-item";
+      row.innerHTML = `
+        <div class="cart-item-main">
+          <div class="cart-item-title">${name}</div>
+          <div class="muted small">$${item.price.toFixed(2)} each</div>
+        </div>
+        <div class="cart-item-actions">
+          <button class="qty" aria-label="Decrease" onclick="changeQty(${JSON.stringify(name)}, -1)">−</button>
+          <span class="qty-count">${item.qty}</span>
+          <button class="qty" aria-label="Increase" onclick="changeQty(${JSON.stringify(name)}, 1)">+</button>
+        </div>
+      `;
+      itemsEl.appendChild(row);
+    }
+
+    subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+    if (cart.size === 0) {
+      summaryEl.textContent = "No items added yet.";
+      return;
+    }
+
+    let text = "";
+    for (const [name, item] of cart) {
+      const line = item.qty * item.price;
+      text += `${name} x${item.qty} — $${line.toFixed(2)}\n`;
+    }
+    if (notes) text += `\nNotes: ${notes}\n`;
+    text += `\nTotal: $${subtotal.toFixed(2)}`;
+    summaryEl.textContent = text;
+  }
+
+  const renderCartDebounced = debounce(renderCart, 120);
+  document.getElementById("orderNotes").addEventListener("input", renderCartDebounced);
+
+  function checkout() {
+    const summary = document.getElementById("orderSummary").textContent;
+    if (!summary || summary === "No items added yet.") {
+      alert("Add something to the cart first.");
+      return;
+    }
+    navigator.clipboard?.writeText(summary);
+    alert("Order summary copied.\n\nNext: send the order summary + your contact info to VFL Creations.");
+  }
+
+  renderCart();
+</script>
 </body>
 </html>
