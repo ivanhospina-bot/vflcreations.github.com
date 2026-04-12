@@ -259,7 +259,7 @@
     const item = cart.get(name) || { price, qty: 0 };
     item.qty++;
     cart.set(name, item);
-    renderCartDebounced();
+    renderCart();
     openCart();
   }
 
@@ -275,7 +275,7 @@
     item.qty += delta;
     if (item.qty <= 0) cart.delete(name);
 
-    renderCartDebounced();
+    renderCart();
   }
 
   function renderCart() {
