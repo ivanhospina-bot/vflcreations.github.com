@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VFL Creations – Orders</title>
+  <meta name="description" content="VFL Creations handmade bracelets, keychains, and customizable nails." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="#top" aria-label="VFL Creations home">
+        <img
+          src="VFL_logo.jpg"
+          class="logo-img"
+          alt="VFL Creations logo"
+        />
+        <span class="logo-creations">Creations</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Handmade accessories that pop ✨</h1>
+          <p class="lead">
+            Shop bracelets, keychains, and customizable nails — affordable, fun, and made just for you.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="#shop">Shop Now</a>
+            <a class="btn ghost" href="#custom">Customize Nails</a>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill">Bracelets: <strong>$2</strong></span>
+            <span class="pill">Keychains: <strong>$2</strong></span>
+            <span class="pill">Custom Nails: <strong>$10</strong></span>
+          </div>
+        </div>
+
+        <!-- Featured -->
+        <div class="hero-card" aria-label="Featured products">
+          <div class="hero-card-top">
+            <h3>Featured</h3>
+            <p>Tap any item to add it to your cart.</p>
+          </div>
+
+          <div class="featured-grid">
+            <figure class="featured"
+              onclick="addToCart('Bracelet (White & Gold)', 2)"
+              role="button" tabindex="0" aria-label="Add Bracelet ">
+              <img src="bracelet_white_and_gold.jpg" alt="White and gold bracelet" />
+              <figcaption>Bracelet (Customizable)<span class="muted">$2</span></figcaption>
+            </figure>
+
+            <figure class="featured"
+              onclick="addToCart('Keychain (Summer)', 2)"
+              role="button" tabindex="0" aria-label="Add Keychain Summer">
+              <img src="keychain_summer.PNG" alt="Summer keychain" />
+              <figcaption>Keychain (Customizable)<span class="muted">$2</span></figcaption>
+            </figure>
+
+            <figure class="featured"
+              onclick="addToCart('Customizable Nails', 10)"
+              role="button" tabindex="0" aria-label="Add Customizable Nails">
+              <img src="nails.jpeg" alt="Custom nails" />
+              <figcaption>Customizable Nails <span class="muted">$10</span></figcaption>
+            </figure>
+          </div>
+
+          <div class="note">
+            Tip: Add your customization details in the cart notes (colors, theme, size, etc.).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop -->
+    <section id="shop" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Shop</h2>
+          <p>Simple pricing. Mix and match.</p>
+        </div>
+
+        <div class="grid products">
+          <article class="card">
+            <img class="product-photo" src="bracelet_white_and_gold.jpg" alt="White and gold bracelet">
+            <h3>Bracelet (Customizable)</h3>
+            <p class="muted">$2 each</p>
+            <button class="btn primary full" onclick="addToCart('Bracelet (White & Gold)', 2)">Add to Cart</button>
+          </article>
+
+          <article class="card">
+            <img class="product-photo" src="keychain_summer.PNG" alt="Summer keychain">
+            <h3>Keychain (Customizable)</h3>
+            <p class="muted">$2 each</p>
+            <button class="btn primary full" onclick="addToCart('Keychain (Summer)', 2)">Add to Cart</button>
+          </article>
+
+          <article class="card nails-sunset">
+            <img class="product-photo" src="nails.jpeg" alt="Custom nails">
+            <h3>Customizable Nails</h3>
+            <p class="muted">$10 each</p>
+            <button class="btn primary full" onclick="addToCart('Customizable Nails', 10)">Add to Cart</button>
+            <div class="note">
+              Tip: Add your customization details in the cart notes (colors, theme, size, etc.).
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Orders -->
+    <section id="custom" class="section soft">
+      <div class="container">
+        <div class="section-head">
+          <h2>Custom Orders (Nails)</h2>
+          <p>Use the cart notes to describe what you want. Examples below:</p>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>What to include</h3>
+            <ul class="list">
+              <li>Colors (e.g., pink + white)</li>
+              <li>Theme (e.g., floral, sparkles, school colors)</li>
+              <li>Shape/style (short, medium, long; square/almond)</li>
+              <li>Size details (if you have them)</li>
+              <li>Any inspiration notes</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Example request</h3>
+            <p class="mono">“Custom Nails: pastel blue + silver glitter, almond shape, medium length. Accent nail with tiny stars.”</p>
+            <p class="muted">You can paste this in the “Order notes” field in the cart.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section soft">
+      <div class="container">
+        <div class="section-head">
+          <h2>Contact</h2>
+          <p>Want a special request or bulk order? Send a message.</p>
+        </div>
+
+        <form class="card form" onsubmit="return handleContactSubmit(event)">
+          <div class="grid two">
+            <label>
+              Name
+              <input required type="text" name="name" placeholder="Your name" />
+            </label>
+            <label>
+              Email
+              <input required type="email" name="email" placeholder="you@example.com" />
+            </label>
+          </div>
+
+          <label>
+            Message
+            <textarea required name="message" rows="5" placeholder="Tell us what you'd like..."></textarea>
+          </label>
+
+          <button class="btn primary" type="submit">Send Message</button>
+          <p class="muted small">(Demo form shows a success message. To receive emails, connect it to a form service.)</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== CART DRAWER ===== -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-panel">
+      <div class="cart-head">
+        <h2>Your Cart</h2>
+        <button class="icon-btn" id="closeCartBtn" aria-label="Close cart">✕</button>
+      </div>
+
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-notes">
+        <label>
+          Order notes (customization details)
+          <textarea id="orderNotes" rows="4" placeholder="Add colors, theme, nail size/style, etc."></textarea>
+        </label>
+      </div>
+
+      <div class="cart-summary">
+        <div class="row"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+
+        <div class="order-summary">
+          <div class="muted small">Copy/paste this when you message us:</div>
+          <pre id="orderSummary">No items added yet.</pre>
+        </div>
+
+        <p class="muted small">Taxes/shipping (if any) can be discussed after order confirmation.</p>
+      </div>
+
+      <button class="btn primary full" onclick="checkout()">Checkout</button>
+      <button class="btn ghost full" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </aside>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> VFL Creations</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const cart = new Map();
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const cartDrawer = document.getElementById("cartDrawer");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+
+    function openCart() {
+      cartDrawer.setAttribute("aria-hidden", "false");
+      cartDrawer.classList.add("open");
+    }
+    function closeCart() {
+      cartDrawer.setAttribute("aria-hidden", "true");
+      cartDrawer.classList.remove("open");
+    }
+
+    closeCartBtn.addEventListener("click", closeCart);
+    cartDrawer.addEventListener("click", (e) => { if (e.target === cartDrawer) closeCart(); });
+
+    function addToCart(name, price) {
+      const item = cart.get(name) || { price, qty: 0 };
+      item.qty++;
+      cart.set(name, item);
+      renderCart();
+      openCart();
+    }
+
+    function clearCart() {
+      cart.clear();
+      renderCart();
+    }
+
+    function changeQty(name, delta) {
+      const item = cart.get(name);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) cart.delete(name);
+      renderCart();
+    }
+
+    function renderCart() {
+      const itemsEl = document.getElementById("cartItems");
+      const subtotalEl = document.getElementById("subtotal");
+      const summaryEl = document.getElementById("orderSummary");
+      const notes = (document.getElementById("orderNotes").value || "").trim();
+
+      itemsEl.innerHTML = "";
+      let subtotal = 0;
+
+      for (const [name, item] of cart) {
+        const line = item.qty * item.price;
+        subtotal += line;
+
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <div class="cart-item-main">
+            <div class="cart-item-title">${name}</div>
+            <div class="muted small">$${item.price.toFixed(2)} each</div>
+          </div>
+          <div class="cart-item-actions">
+            <button class="qty" aria-label="Decrease" onclick="changeQty(${JSON.stringify(name)}, -1)">−</button>
+            <span class="qty-count">${item.qty}</span>
+            <button class="qty" aria-label="Increase" onclick="changeQty(${JSON.stringify(name)}, 1)">+</button>
+          </div>
+        `;
+        itemsEl.appendChild(row);
+      }
+
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      if (cart.size === 0) {
+        summaryEl.textContent = "No items added yet.";
+        return;
+      }
+
+      let text = "";
+      for (const [name, item] of cart) {
+        const line = item.qty * item.price;
+        text += `${name} x${item.qty} — $${line.toFixed(2)}\n`;
+      }
+      if (notes) text += `\nNotes: ${notes}\n`;
+      text += `\nTotal: $${subtotal.toFixed(2)}`;
+      summaryEl.textContent = text;
+    }
+
+    document.getElementById("orderNotes").addEventListener("input", renderCart);
+
+    function checkout() {
+      const summary = document.getElementById("orderSummary").textContent;
+      if (!summary || summary === "No items added yet.") {
+        alert("Add something to the cart first.");
+        return;
+      }
+      navigator.clipboard?.writeText(summary);
+      alert("Order summary copied (if your browser allows).\n\nNext: send the order summary + your contact info to VFL Creations.");
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert("Thanks! Your message was captured (demo).");
+      e.target.reset();
+      return false;
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
