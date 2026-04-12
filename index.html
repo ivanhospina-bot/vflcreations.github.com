@@ -155,7 +155,12 @@
           <p>Want a special request or bulk order? Send a message.</p>
         </div>
 
-        <form class="card form" onsubmit="return handleContactSubmit(event)">
+        <form
+          class="card form"
+          action="https://formspree.io/f/mdayndvy"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="New Message from VFL Creations Website">
           <div class="grid two">
             <label>
               Name
@@ -173,7 +178,6 @@
           </label>
 
           <button class="btn primary" type="submit">Send Message</button>
-          <p class="muted small">(Demo form shows a success message. To receive emails, connect it to a form service.)</p>
         </form>
       </div>
     </section>
