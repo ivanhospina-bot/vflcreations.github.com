@@ -225,20 +225,17 @@
 
   <!-- ===== SCRIPT ===== -->
   <script>
-  // prevents heavy functions from running too often
-  function debounce(func, delay = 120) {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => func.apply(null, args), delay);
-    };
-  }
-
+  // Cache all DOM references once at startup
   const cart = new Map();
-  document.getElementById("year").textContent = new Date().getFullYear();
-
+  const yearEl = document.getElementById("year");
   const cartDrawer = document.getElementById("cartDrawer");
   const closeCartBtn = document.getElementById("closeCartBtn");
+  const itemsEl = document.getElementById("cartItems");
+  const subtotalEl = document.getElementById("subtotal");
+  const summaryEl = document.getElementById("orderSummary");
+  const notesEl = document.getElementById("orderNotes");
+
+  yearEl.textContent = new Date().getFullYear();
 
   function openCart() {
     cartDrawer.setAttribute("aria-hidden", "false");
@@ -279,56 +276,52 @@
   }
 
   function renderCart() {
-    const itemsEl = document.getElementById("cartItems");
-    const subtotalEl = document.getElementById("subtotal");
-    const summaryEl = document.getElementById("orderSummary");
-    const notes = (document.getElementById("orderNotes").value || "").trim();
-
-    itemsEl.innerHTML = "";
+    const notes = (notesEl.value || "").trim();
+    let html = "";
     let subtotal = 0;
+    let summaryText = "";
 
     for (const [name, item] of cart) {
       const line = item.qty * item.price;
       subtotal += line;
+      const safeName = name.replace(/'/g, "\\'");
 
-      const row = document.createElement("div");
-      row.className = "cart-item";
-      row.innerHTML = `
+      html += `<div class="cart-item">
         <div class="cart-item-main">
           <div class="cart-item-title">${name}</div>
           <div class="muted small">$${item.price.toFixed(2)} each</div>
         </div>
         <div class="cart-item-actions">
-          <button class="qty" aria-label="Decrease" onclick="changeQty(${JSON.stringify(name)}, -1)">−</button>
+          <button class="qty" aria-label="Decrease" onclick="changeQty('${safeName}', -1)">−</button>
           <span class="qty-count">${item.qty}</span>
-          <button class="qty" aria-label="Increase" onclick="changeQty(${JSON.stringify(name)}, 1)">+</button>
+          <button class="qty" aria-label="Increase" onclick="changeQty('${safeName}', 1)">+</button>
         </div>
-      `;
-      itemsEl.appendChild(row);
+      </div>`;
+
+      summaryText += `${name} x${item.qty} — $${line.toFixed(2)}\n`;
     }
 
+    itemsEl.innerHTML = html;
     subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
 
     if (cart.size === 0) {
       summaryEl.textContent = "No items added yet.";
-      return;
+    } else {
+      if (notes) summaryText += `\nNotes: ${notes}\n`;
+      summaryText += `\nTotal: $${subtotal.toFixed(2)}`;
+      summaryEl.textContent = summaryText;
     }
-
-    let text = "";
-    for (const [name, item] of cart) {
-      const line = item.qty * item.price;
-      text += `${name} x${item.qty} — $${line.toFixed(2)}\n`;
-    }
-    if (notes) text += `\nNotes: ${notes}\n`;
-    text += `\nTotal: $${subtotal.toFixed(2)}`;
-    summaryEl.textContent = text;
   }
 
-  const renderCartDebounced = debounce(renderCart, 120);
-  document.getElementById("orderNotes").addEventListener("input", renderCartDebounced);
+  // Only debounce the notes input, not button clicks
+  let notesTimeout;
+  notesEl.addEventListener("input", () => {
+    clearTimeout(notesTimeout);
+    notesTimeout = setTimeout(renderCart, 150);
+  });
 
   function checkout() {
-    const summary = document.getElementById("orderSummary").textContent;
+    const summary = summaryEl.textContent;
     if (!summary || summary === "No items added yet.") {
       alert("Add something to the cart first.");
       return;
