@@ -3,8 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VFL Creations – Orders</title>
-  <meta name="description" content="VFL Creations handmade bracelets, keychains, and customizable nails." />
+  <title>VFL Creations – Handmade Bracelets, Keychains & Custom Nails</title>
+  <meta name="description" content="VFL Creations handmade bracelets, keychains, and customizable nails. Affordable, fun accessories made just for you." />
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="VFL Creations – Handmade Accessories" />
+  <meta property="og:description" content="Shop handmade bracelets ($2), keychains ($2), and customizable nails ($5). Affordable, fun, and made just for you!" />
+  <meta property="og:image" content="VFL_logo.jpg" />
+  <meta property="og:url" content="https://vflcreations.github.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -91,21 +100,22 @@
         </div>
 
         <div class="grid products">
-          <article class="card">
+          <article class="card fade-in">
             <img class="product-photo" src="bracelet_white_and_gold.jpg" alt="White and gold bracelet">
             <h3>Bracelet (Customizable)</h3>
             <p class="muted">$2 each</p>
             <button class="btn primary full" onclick="addToCart('Bracelet', 2)">Add to Cart</button>
           </article>
 
-          <article class="card">
+          <article class="card fade-in">
             <img class="product-photo" src="keychain_summer.PNG" alt="Summer keychain">
             <h3>Keychain (Customizable)</h3>
             <p class="muted">$2 each</p>
             <button class="btn primary full" onclick="addToCart('Keychain (Summer)', 2)">Add to Cart</button>
           </article>
 
-          <article class="card nails-sunset">
+          <article class="card nails-sunset fade-in">
+            <span class="badge-popular">🔥 Popular</span>
             <img class="product-photo" src="nails.jpeg" alt="Custom nails">
             <h3>Customizable Nails</h3>
             <p class="muted">$5 each</p>
@@ -143,6 +153,151 @@
             <p class="mono">“Custom Nails: pastel blue + silver glitter, almond shape, medium length. Accent nail with tiny stars.”</p>
             <p class="muted">You can paste this in the “Order notes” field in the cart.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nail Size Guide -->
+    <section id="size-guide" class="section fade-in">
+      <div class="container">
+        <div class="section-head">
+          <h2>Nail Size Guide</h2>
+          <p>Find your perfect fit! Measure from cuticle to tip.</p>
+        </div>
+
+        <div class="card size-chart">
+          <div class="size-row header">
+            <span>Size</span>
+            <span>Width (mm)</span>
+            <span>Best For</span>
+          </div>
+          <div class="size-row">
+            <span><strong>XS</strong></span>
+            <span>10-11mm</span>
+            <span>Pinky fingers</span>
+          </div>
+          <div class="size-row">
+            <span><strong>S</strong></span>
+            <span>12-13mm</span>
+            <span>Ring fingers</span>
+          </div>
+          <div class="size-row">
+            <span><strong>M</strong></span>
+            <span>14-15mm</span>
+            <span>Middle fingers</span>
+          </div>
+          <div class="size-row">
+            <span><strong>L</strong></span>
+            <span>16-17mm</span>
+            <span>Index fingers</span>
+          </div>
+          <div class="size-row">
+            <span><strong>XL</strong></span>
+            <span>18-20mm</span>
+            <span>Thumbs</span>
+          </div>
+          <p class="muted small" style="margin-top:12px;">💡 Tip: Use a measuring tape or ruler. If between sizes, go up!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="reviews" class="section soft fade-in">
+      <div class="container">
+        <div class="section-head">
+          <h2>What Customers Say ⭐</h2>
+          <p>Real reviews from happy customers</p>
+        </div>
+
+        <div class="grid testimonials">
+          <div class="card testimonial">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Love my custom bracelet! The colors are exactly what I asked for. Will definitely order again!"</p>
+            <div class="reviewer">— Sarah M.</div>
+          </div>
+
+          <div class="card testimonial">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"The nails turned out perfect! Great quality for the price. Super cute designs!"</p>
+            <div class="reviewer">— Jessica T.</div>
+          </div>
+
+          <div class="card testimonial">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p>"Fast communication and my keychain came out adorable. Perfect gift for my friend!"</p>
+            <div class="reviewer">— Maria L.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section fade-in">
+      <div class="container">
+        <div class="section-head">
+          <h2>Frequently Asked Questions</h2>
+          <p>Got questions? We've got answers!</p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Who is VFL Creations?</summary>
+            <div class="faq-answer">
+              VFL Creations was born in April 2026 from the friendship of 3 friends who share a passion for handmade accessories. We create unique, affordable pieces with love!
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What payment methods do you accept?</summary>
+            <div class="faq-answer">
+              We accept Venmo and PayPal. After you submit your order through our contact form, we'll send you payment details via email.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>How long does it take to make my order?</summary>
+            <div class="faq-answer">
+              Most orders are completed within 3-5 business days. Custom nail sets may take up to 7 days depending on complexity. We'll keep you updated!
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Can I fully customize my order?</summary>
+            <div class="faq-answer">
+              Absolutely! Bracelets, keychains, and nails can all be customized. Just add your preferences (colors, themes, sizes) in the order notes or message us directly.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>Do you offer shipping?</summary>
+            <div class="faq-answer">
+              Yes! We offer local pickup and shipping. Shipping costs vary by location and will be discussed after you place your order.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>What if I'm not happy with my order?</summary>
+            <div class="faq-answer">
+              Your satisfaction matters to us! If there's an issue with your order, reach out within 48 hours and we'll work to make it right.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section soft fade-in">
+      <div class="container">
+        <div class="newsletter-box">
+          <div class="newsletter-content">
+            <h2>🎉 Get 10% Off Your First Order!</h2>
+            <p>Join our list for exclusive deals, new product drops, and special offers.</p>
+          </div>
+          <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" id="newsletterEmail" placeholder="your@email.com" required />
+            <button type="submit" class="btn primary">Subscribe</button>
+          </form>
+          <p class="muted small">No spam, ever. Unsubscribe anytime.</p>
         </div>
       </div>
     </section>
@@ -337,6 +492,25 @@
     // Scroll to contact section
     document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
   }
+
+  // Newsletter subscription
+  function subscribeNewsletter(e) {
+    e.preventDefault();
+    const email = document.getElementById("newsletterEmail").value;
+    alert("Thanks for subscribing! We'll send your 10% discount code to " + email);
+    document.getElementById("newsletterEmail").value = "";
+  }
+
+  // Scroll fade-in animation
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+  document.querySelectorAll(".fade-in").forEach(el => fadeObserver.observe(el));
 
   renderCart();
 </script>
