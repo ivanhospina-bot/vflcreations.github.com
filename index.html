@@ -41,7 +41,7 @@
           <div class="pill-row">
             <span class="pill">Bracelets: <strong>$2</strong></span>
             <span class="pill">Keychains: <strong>$2</strong></span>
-            <span class="pill">Custom Nails: <strong>$10</strong></span>
+            <span class="pill">Custom Nails: <strong>$5</strong></span>
           </div>
         </div>
 
@@ -54,8 +54,8 @@
 
           <div class="featured-grid">
             <figure class="featured"
-              onclick="addToCart('Bracelet (White & Gold)', 2)"
-              role="button" tabindex="0" aria-label="Add Bracelet ">
+              onclick="addToCart('Bracelet', 2)"
+              role="button" tabindex="0" aria-label="Add Bracelet">
               <img src="bracelet_white_and_gold.jpg" alt="White and gold bracelet" />
               <figcaption>Bracelet (Customizable)<span class="muted">$2</span></figcaption>
             </figure>
@@ -68,10 +68,10 @@
             </figure>
 
             <figure class="featured"
-              onclick="addToCart('Customizable Nails', 10)"
+              onclick="addToCart('Customizable Nails', 5)"
               role="button" tabindex="0" aria-label="Add Customizable Nails">
               <img src="nails.jpeg" alt="Custom nails" />
-              <figcaption>Customizable Nails <span class="muted">$10</span></figcaption>
+              <figcaption>Customizable Nails <span class="muted">$5</span></figcaption>
             </figure>
           </div>
 
@@ -95,7 +95,7 @@
             <img class="product-photo" src="bracelet_white_and_gold.jpg" alt="White and gold bracelet">
             <h3>Bracelet (Customizable)</h3>
             <p class="muted">$2 each</p>
-            <button class="btn primary full" onclick="addToCart('Bracelet (White & Gold)', 2)">Add to Cart</button>
+            <button class="btn primary full" onclick="addToCart('Bracelet', 2)">Add to Cart</button>
           </article>
 
           <article class="card">
@@ -108,8 +108,8 @@
           <article class="card nails-sunset">
             <img class="product-photo" src="nails.jpeg" alt="Custom nails">
             <h3>Customizable Nails</h3>
-            <p class="muted">$10 each</p>
-            <button class="btn primary full" onclick="addToCart('Customizable Nails', 10)">Add to Cart</button>
+            <p class="muted">$5 each</p>
+            <button class="btn primary full" onclick="addToCart('Customizable Nails', 5)">Add to Cart</button>
             <div class="note">
               Tip: Add your customization details in the cart notes (colors, theme, size, etc.).
             </div>
@@ -326,8 +326,9 @@
       alert("Add something to the cart first.");
       return;
     }
-    navigator.clipboard?.writeText(summary);
-    alert("Order summary copied.\n\nNext: send the order summary + your contact info to VFL Creations.");
+    const subject = encodeURIComponent("VFL Creations Order");
+    const body = encodeURIComponent(summary);
+    window.location.href = `mailto:orders@vflcreations.com?subject=${subject}&body=${body}`;
   }
 
   renderCart();
