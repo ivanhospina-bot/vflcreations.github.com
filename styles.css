@@ -533,7 +533,16 @@ button.btn{border:none}
 
 /* ===== Size Chart ===== */
 .size-chart{
-  max-width: 500px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.size-chart-img{
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
   margin: 0 auto;
 }
 .size-row{
