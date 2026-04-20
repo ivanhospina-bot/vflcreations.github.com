@@ -362,6 +362,13 @@ input:focus, textarea:focus{
 .footer-row{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;}
 
 /* Social Links */
+.social-heading{
+  font-size:1.1rem;
+  font-weight:700;
+  color:var(--text);
+  margin:0 0 12px 0;
+  letter-spacing:.5px;
+}
 .social-links{
   display:flex;
   justify-content:center;
