@@ -299,23 +299,6 @@
       </div>
     </section>
 
-    <!-- Newsletter -->
-    <section id="newsletter" class="section soft fade-in">
-      <div class="container">
-        <div class="newsletter-box">
-          <div class="newsletter-content">
-            <h2>🎉 Get 10% Off Your First Order!</h2>
-            <p>Join our list for exclusive deals, new product drops, and special offers.</p>
-          </div>
-          <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
-            <input type="email" id="newsletterEmail" placeholder="your@email.com" required />
-            <button type="submit" class="btn primary">Subscribe</button>
-          </form>
-          <p class="muted small">No spam, ever. Unsubscribe anytime.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="section soft">
       <div class="container">
@@ -514,14 +497,6 @@
     }
     // Scroll to contact section
     document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
-  }
-
-  // Newsletter subscription
-  function subscribeNewsletter(e) {
-    e.preventDefault();
-    const email = document.getElementById("newsletterEmail").value;
-    alert("Thanks for subscribing! We'll send your 10% discount code to " + email);
-    document.getElementById("newsletterEmail").value = "";
   }
 
   // Scroll fade-in animation
